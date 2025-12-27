@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Khurana | Portfolio</title>
+    <meta name="description" content="Personal homepage of Robin Khurana.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <h1 class="logo">RK.</h1>
+            <nav class="nav">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="name">Robin Khurana Progress</h1>
+            </div>
+        </section>
+
+        <section class="market-overview" style="padding: 2rem 0;">
+            <h3 class="section-title">Market Overview</h3>
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript"
+                    src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                        {
+                            "symbols": [
+                                { "proName": "NASDAQ:GOOGL", "title": "Google" },
+                                { "proName": "NASDAQ:AAPL", "title": "Apple" },
+                                { "proName": "NASDAQ:MSFT", "title": "Microsoft" },
+                                { "proName": "NASDAQ:AMZN", "title": "Amazon" },
+                                { "proName": "NASDAQ:META", "title": "Meta" },
+                                { "proName": "NSE:ASIANPAINT", "title": "Asian Paints" },
+                                { "proName": "NSE:AXISBANK", "title": "Axis Bank" }
+                            ],
+                                "showSymbolLogo": true,
+                                    "colorTheme": "dark",
+                                        "isTransparent": true,
+                                            "displayMode": "adaptive",
+                                                "locale": "en_IN",
+                                                    "timezone": "Asia/Kolkata"
+                        }
+                    </script>
+            </div>
+        </section>
+
+
+        <section class="daily-goals">
+            <h3 class="section-title">Daily Goals</h3>
+            <div class="goals-container">
+                <div class="goal-input-group">
+                    <input type="text" id="daily-goal-input" placeholder="Today's focus..." autocomplete="off">
+                    <button id="add-daily-goal-btn" aria-label="Add daily goal">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <ul id="daily-goals-list" class="goals-list">
+                    <!-- Daily goals will be added here dynamically -->
+                </ul>
+            </div>
+        </section>
+
+        <section class="news">
+            <h3 class="section-title">Long Term Goals</h3>
+            <div class="goals-container">
+                <div class="goal-input-group">
+                    <input type="text" id="goal-input" placeholder="Enter a new long term goal..." autocomplete="off">
+                    <button id="add-goal-btn" aria-label="Add goal">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <ul id="goals-list" class="goals-list">
+                    <!-- Goals will be added here dynamically -->
+                </ul>
+            </div>
+        </section>
+
+        <section class="news">
+            <h3 class="section-title">News Today</h3>
+            <div class="news-container">
+                <div class="news-category">
+                    <span class="category-label world">World</span>
+                    <div class="ticker-wrap">
+                        <div class="ticker" id="ticker-world">
+                            <span class="news-item">Loading World News...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-category">
+                    <span class="category-label business">Business</span>
+                    <div class="ticker-wrap">
+                        <div class="ticker" id="ticker-business">
+                            <span class="news-item">Loading Business News...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-category">
+                    <span class="category-label sports">Cricket</span>
+                    <div class="ticker-wrap">
+                        <div class="ticker" id="ticker-cricket">
+                            <span class="news-item">Loading Cricket News...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-category">
+                    <span class="category-label bollywood">Bollywood</span>
+                    <div class="ticker-wrap">
+                        <div class="ticker" id="ticker-bollywood">
+                            <span class="news-item">Loading Bollywood News...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-category">
+                    <span class="category-label entertainment">Entertainment</span>
+                    <div class="ticker-wrap">
+                        <div class="ticker" id="ticker-entertainment">
+                            <span class="news-item">Loading Entertainment News...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-category">
+                    <span class="category-label national">National</span>
+                    <div class="ticker-wrap">
+                        <div class="ticker" id="ticker-national">
+                            <span class="news-item">Loading National News...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Robin Khurana. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Card Glow Effect
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Dynamic News Fetching via rss2json
+        const rss2json = "https://api.rss2json.com/v1/api.json?rss_url=";
+        const channels = {
+            world: "UC16niRr50-MSBwiO3YDb3RA", // BBC YouTube ID
+            business: "UCvJJ_dzjViJCoLf5uKUTwoA", // CNBC YouTube ID
+            // Use this specific TOI RSS feed for Cricket - it is very stable
+            cricket: "https://timesofindia.indiatimes.com/rssfeeds/54829575.cms",
+            entertainment: "UCdtXPiqI2cLorKaPrfpKc4g",
+            national: "UCYPvAwZP8pZhSMW8qs7cVCw",
+            bollywood: "https://timesofindia.indiatimes.com/rssfeeds/1081479906.cms"
+        };
+
+        Object.entries(channels).forEach(([key, value]) => {
+            // If it's a YouTube ID (lengthy alphanumeric), format the URL, otherwise use as is
+            const targetUrl = value.length === 24
+                ? `https://www.youtube.com/feeds/videos.xml?channel_id=${value}`
+                : value;
+
+            fetch(`${rss2json}${encodeURIComponent(targetUrl)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tickerElement = document.getElementById(`ticker-${key}`);
+                    if (data.status === 'ok' && data.items.length > 0) {
+                        const tickerContent = data.items.map(item =>
+                            `<a href="${item.link}" target="_blank" class="news-item link">${item.title}</a>`
+                        ).join(' <span class="separator">|</span> ');
+                        tickerElement.innerHTML = tickerContent + " | " + tickerContent;
+                    } else {
+                        tickerElement.innerHTML = '<span class="news-item">Feed currently updating...</span>';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById(`ticker-${key}`).innerHTML = '<span class="news-item">Feed offline.</span>';
+                });
+        });
+
+        // Long Term Goals Logic
+        const goalInput = document.getElementById('goal-input');
+        const addGoalBtn = document.getElementById('add-goal-btn');
+        const goalsList = document.getElementById('goals-list');
+
+        let goals = JSON.parse(localStorage.getItem('longTermGoals')) || [];
+
+        function saveGoals() {
+            localStorage.setItem('longTermGoals', JSON.stringify(goals));
+        }
+
+        function renderGoals() {
+            goalsList.innerHTML = '';
+            goals.forEach((goal, index) => {
+                const li = document.createElement('li');
+                li.className = `goal-item ${goal.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <div class="goal-text-wrapper">
+                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleGoal(${index})">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="goal-text" onclick="toggleGoal(${index})">${goal.text}</span>
+                    </div>
+                    <button class="goal-delete" onclick="deleteGoal(${index})" aria-label="Delete goal">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                goalsList.appendChild(li);
+            });
+        }
+
+        function addGoal() {
+            const text = goalInput.value.trim();
+            if (text) {
+                goals.push({ text, completed: false });
+                goalInput.value = '';
+                saveGoals();
+                renderGoals();
+            }
+        }
+
+        function toggleGoal(index) {
+            goals[index].completed = !goals[index].completed;
+            saveGoals();
+            renderGoals();
+        }
+
+        function deleteGoal(index) {
+            goals.splice(index, 1);
+            saveGoals();
+            renderGoals();
+        }
+
+        addGoalBtn.addEventListener('click', addGoal);
+        goalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addGoal();
+        });
+
+        renderGoals();
+
+        // Daily Goals Logic
+        const dailyGoalInput = document.getElementById('daily-goal-input');
+        const addDailyGoalBtn = document.getElementById('add-daily-goal-btn');
+        const dailyGoalsList = document.getElementById('daily-goals-list');
+
+        let dailyGoals = JSON.parse(localStorage.getItem('dailyGoals')) || [];
+
+        function saveDailyGoals() {
+            localStorage.setItem('dailyGoals', JSON.stringify(dailyGoals));
+        }
+
+        function renderDailyGoals() {
+            dailyGoalsList.innerHTML = '';
+            dailyGoals.forEach((goal, index) => {
+                const li = document.createElement('li');
+                li.className = `goal-item ${goal.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <div class="goal-text-wrapper">
+                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleDailyGoal(${index})">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="goal-text" onclick="toggleDailyGoal(${index})">${goal.text}</span>
+                    </div>
+                    <button class="goal-delete" onclick="deleteDailyGoal(${index})" aria-label="Delete goal">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                dailyGoalsList.appendChild(li);
+            });
+        }
+
+        function addDailyGoal() {
+            const text = dailyGoalInput.value.trim();
+            if (text) {
+                dailyGoals.push({ text, completed: false });
+                dailyGoalInput.value = '';
+                saveDailyGoals();
+                renderDailyGoals();
+            }
+        }
+
+        function toggleDailyGoal(index) {
+            dailyGoals[index].completed = !dailyGoals[index].completed;
+            saveDailyGoals();
+            renderDailyGoals();
+        }
+
+        function deleteDailyGoal(index) {
+            dailyGoals.splice(index, 1);
+            saveDailyGoals();
+            renderDailyGoals();
+        }
+
+        addDailyGoalBtn.addEventListener('click', addDailyGoal);
+        dailyGoalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addDailyGoal();
+        });
+
+        renderDailyGoals();
+    </script>
+</body>
+
+</html>
