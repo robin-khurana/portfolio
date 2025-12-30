@@ -35,33 +35,32 @@
                 <h1 class="name">Robin Khurana Progress</h1>
             </div>
         </section>
+
         <section class="market-overview" style="padding: 2rem 0;">
             <h3 class="section-title">Market Overview</h3>
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript"
-                    src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-                        {
-                            "symbols": [
-                                { "proName": "NASDAQ:GOOGL", "title": "Google" },
-                                { "proName": "NASDAQ:AAPL", "title": "Apple" },
-                                { "proName": "NASDAQ:MSFT", "title": "Microsoft" },
-                                { "proName": "NASDAQ:AMZN", "title": "Amazon" },
-                                { "proName": "NASDAQ:META", "title": "Meta" },
-                                { "proName": "NSE:ASIANPAINT", "title": "Asian Paints" },
-                                { "proName": "NSE:AXISBANK", "title": "Axis Bank" }
-                            ],
-                                "showSymbolLogo": true,
-                                    "colorTheme": "dark",
-                                        "isTransparent": true,
-                                            "displayMode": "adaptive",
-                                                "locale": "en_IN",
-                                                    "timezone": "Asia/Kolkata"
-                        }
-                    </script>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                    {
+                        "symbols": [
+                            { "proName": "NASDAQ:GOOGL", "title": "Google" },
+                            { "proName": "NASDAQ:AAPL", "title": "Apple" },
+                            { "proName": "NASDAQ:MSFT", "title": "Microsoft" },
+                            { "proName": "NASDAQ:AMZN", "title": "Amazon" },
+                            { "proName": "NASDAQ:META", "title": "Meta" },
+                            { "proName": "NSE:ASIANPAINT", "title": "Asian Paints" },
+                            { "proName": "NSE:AXISBANK", "title": "Axis Bank" }
+                        ],
+                        "showSymbolLogo": true,
+                        "colorTheme": "dark",
+                        "isTransparent": true,
+                        "displayMode": "adaptive",
+                        "locale": "en_IN",
+                        "timezone": "Asia/Kolkata"
+                    }
+                </script>
             </div>
         </section>
-
 
         <section class="daily-goals">
             <h3 class="section-title">Daily Goals</h3>
@@ -72,9 +71,7 @@
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
-                <ul id="daily-goals-list" class="goals-list">
-                    <!-- Daily goals will be added here dynamically -->
-                </ul>
+                <ul id="daily-goals-list" class="goals-list"></ul>
             </div>
         </section>
 
@@ -87,65 +84,19 @@
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
-                <ul id="goals-list" class="goals-list">
-                    <!-- Goals will be added here dynamically -->
-                </ul>
+                <ul id="goals-list" class="goals-list"></ul>
             </div>
         </section>
 
         <section class="news">
             <h3 class="section-title">News Today</h3>
             <div class="news-container">
-                <div class="news-category">
-                    <span class="category-label world">World</span>
-                    <div class="ticker-wrap">
-                        <div class="ticker" id="ticker-world">
-                            <span class="news-item">Loading World News...</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="news-category">
-                    <span class="category-label business">Business</span>
-                    <div class="ticker-wrap">
-                        <div class="ticker" id="ticker-business">
-                            <span class="news-item">Loading Business News...</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-category">
-                    <span class="category-label sports">Cricket</span>
-                    <div class="ticker-wrap">
-                        <div class="ticker" id="ticker-cricket">
-                            <span class="news-item">Loading Cricket News...</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-category">
-                    <span class="category-label bollywood">Bollywood</span>
-                    <div class="ticker-wrap">
-                        <div class="ticker" id="ticker-bollywood">
-                            <span class="news-item">Loading Bollywood News...</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-category">
-                    <span class="category-label entertainment">Entertainment</span>
-                    <div class="ticker-wrap">
-                        <div class="ticker" id="ticker-entertainment">
-                            <span class="news-item">Loading Entertainment News...</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="news-category">
-                    <span class="category-label national">National</span>
-                    <div class="ticker-wrap">
-                        <div class="ticker" id="ticker-national">
-                            <span class="news-item">Loading National News...</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="news-category"><span class="category-label world">World</span><div class="ticker-wrap"><div class="ticker" id="ticker-world"></div></div></div>
+                <div class="news-category"><span class="category-label business">Business</span><div class="ticker-wrap"><div class="ticker" id="ticker-business"></div></div></div>
+                <div class="news-category"><span class="category-label sports">Cricket</span><div class="ticker-wrap"><div class="ticker" id="ticker-cricket"></div></div></div>
+                <div class="news-category"><span class="category-label bollywood">Bollywood</span><div class="ticker-wrap"><div class="ticker" id="ticker-bollywood"></div></div></div>
+                <div class="news-category"><span class="category-label entertainment">Entertainment</span><div class="ticker-wrap"><div class="ticker" id="ticker-entertainment"></div></div></div>
+                <div class="news-category"><span class="category-label national">National</span><div class="ticker-wrap"><div class="ticker" id="ticker-national"></div></div></div>
             </div>
         </section>
     </main>
@@ -155,23 +106,14 @@
     </footer>
 
     <script>
-        // Card Glow Effect
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-
-        // Dynamic News Fetching via rss2json
+        // --- CONFIGURATION ---
+        const API_BASE = 'https://robbie57.pythonanywhere.com/api';
         const rss2json = "https://api.rss2json.com/v1/api.json?rss_url=";
+
+        // --- NEWS LOGIC ---
         const channels = {
-            world: "UC16niRr50-MSBwiO3YDb3RA", // BBC YouTube ID
-            business: "UCvJJ_dzjViJCoLf5uKUTwoA", // CNBC YouTube ID
-            // Use this specific TOI RSS feed for Cricket - it is very stable
+            world: "UC16niRr50-MSBwiO3YDb3RA", 
+            business: "UCvJJ_dzjViJCoLf5uKUTwoA", 
             cricket: "https://timesofindia.indiatimes.com/rssfeeds/54829575.cms",
             entertainment: "UCdtXPiqI2cLorKaPrfpKc4g",
             national: "UCYPvAwZP8pZhSMW8qs7cVCw",
@@ -179,180 +121,81 @@
         };
 
         Object.entries(channels).forEach(([key, value]) => {
-            // If it's a YouTube ID (lengthy alphanumeric), format the URL, otherwise use as is
-            const targetUrl = value.length === 24
-                ? `https://www.youtube.com/feeds/videos.xml?channel_id=${value}`
-                : value;
-
+            const targetUrl = value.length === 24 ? `https://www.youtube.com/feeds/videos.xml?channel_id=${value}` : value;
             fetch(`${rss2json}${encodeURIComponent(targetUrl)}`)
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
-                    const tickerElement = document.getElementById(`ticker-${key}`);
-                    if (data.status === 'ok' && data.items.length > 0) {
-                        const tickerContent = data.items.map(item =>
-                            `<a href="${item.link}" target="_blank" class="news-item link">${item.title}</a>`
-                        ).join(' <span class="separator">|</span> ');
-                        tickerElement.innerHTML = tickerContent + " | " + tickerContent;
-                    } else {
-                        tickerElement.innerHTML = '<span class="news-item">Feed currently updating...</span>';
+                    const el = document.getElementById(`ticker-${key}`);
+                    if (data.status === 'ok') {
+                        const content = data.items.map(i => `<a href="${i.link}" target="_blank" class="news-item link">${i.title}</a>`).join(' | ');
+                        el.innerHTML = content + " | " + content;
                     }
-                })
-                .catch(() => {
-                    document.getElementById(`ticker-${key}`).innerHTML = '<span class="news-item">Feed offline.</span>';
-                });
+                }).catch(() => {});
         });
 
-        const API_BASE = 'http://127.0.0.1:5000/api';
-
-        async function fetchGoals(type) {
+        // --- BACKEND API FUNCTIONS ---
+        async function apiCall(endpoint, method = 'GET', body = null) {
+            const options = { method, headers: { 'Content-Type': 'application/json' } };
+            if (body) options.body = JSON.stringify(body);
             try {
-                const response = await fetch(`${API_BASE}/goals?type=${type}`);
-                return await response.json();
-            } catch (error) {
-                console.error(`Error fetching ${type} goals:`, error);
-                return [];
+                const res = await fetch(`${API_BASE}${endpoint}`, options);
+                return res.ok ? await res.json() : null;
+            } catch (e) { console.error(e); return null; }
+        }
+
+        // --- GOAL ACTIONS ---
+        window.handleToggle = async (id, currentStatus, type) => {
+            await apiCall(`/goals/${id}`, 'PUT', { completed: !currentStatus });
+            render(type);
+        };
+
+        window.handleDelete = async (id, type) => {
+            await apiCall(`/goals/${id}`, 'DELETE');
+            render(type);
+        };
+
+        async function addGoal(inputId, type) {
+            const input = document.getElementById(inputId);
+            const text = input.value.trim();
+            if (text) {
+                await apiCall('/goals', 'POST', { text, type });
+                input.value = '';
+                render(type);
             }
         }
 
-        async function addGoalToDB(text, type) {
-            try {
-                const response = await fetch(`${API_BASE}/goals`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text, type })
-                });
-                return await response.json();
-            } catch (error) {
-                console.error('Error adding goal:', error);
-            }
-        }
-
-        async function updateGoalInDB(id, completed) {
-            try {
-                await fetch(`${API_BASE}/goals/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ completed })
-                });
-            } catch (error) {
-                console.error('Error updating goal:', error);
-            }
-        }
-
-        async function deleteGoalFromDB(id) {
-            try {
-                await fetch(`${API_BASE}/goals/${id}`, {
-                    method: 'DELETE'
-                });
-            } catch (error) {
-                console.error('Error deleting goal:', error);
-            }
-        }
-
-        // Long Term Goals Logic
-        const goalInput = document.getElementById('goal-input');
-        const addGoalBtn = document.getElementById('add-goal-btn');
-        const goalsList = document.getElementById('goals-list');
-
-        async function renderGoals() {
-            const goals = await fetchGoals('long-term');
-            goalsList.innerHTML = '';
-            goals.forEach((goal) => {
-                const li = document.createElement('li');
-                li.className = `goal-item ${goal.completed ? 'completed' : ''}`;
-                li.innerHTML = `
+        // --- RENDERING ---
+        async function render(type) {
+            const goals = await apiCall(`/goals?type=${type}`);
+            const list = document.getElementById(type === 'daily' ? 'daily-goals-list' : 'goals-list');
+            if (!goals) return;
+            
+            list.innerHTML = goals.map(g => `
+                <li class="goal-item ${g.completed ? 'completed' : ''}">
                     <div class="goal-text-wrapper">
-                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleGoal(${goal.id}, ${goal.completed})">
+                        <div class="goal-check ${g.completed ? 'checked' : ''}" onclick="handleToggle(${g.id}, ${g.completed}, '${type}')">
                             <i class="fa-solid fa-check"></i>
                         </div>
-                        <span class="goal-text" onclick="toggleGoal(${goal.id}, ${goal.completed})">${goal.text}</span>
+                        <span class="goal-text">${g.text}</span>
                     </div>
-                    <button class="goal-delete" onclick="deleteGoal(${goal.id})" aria-label="Delete goal">
+                    <button class="goal-delete" onclick="handleDelete(${g.id}, '${type}')">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
-                `;
-                goalsList.appendChild(li);
-            });
+                </li>
+            `).join('');
         }
 
-        async function addGoal() {
-            const text = goalInput.value.trim();
-            if (text) {
-                await addGoalToDB(text, 'long-term');
-                goalInput.value = '';
-                renderGoals();
-            }
-        }
-
-        async function toggleGoal(id, currentStatus) {
-            await updateGoalInDB(id, !currentStatus);
-            renderGoals();
-        }
-
-        async function deleteGoal(id) {
-            await deleteGoalFromDB(id);
-            renderGoals();
-        }
-
-        addGoalBtn.addEventListener('click', addGoal);
-        goalInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addGoal();
+        // --- LISTENERS ---
+        document.getElementById('add-goal-btn').onclick = () => addGoal('goal-input', 'long-term');
+        document.getElementById('add-daily-goal-btn').onclick = () => addGoal('daily-goal-input', 'daily');
+        
+        ['goal-input', 'daily-goal-input'].forEach(id => {
+            document.getElementById(id).onkeypress = (e) => { if(e.key === 'Enter') addGoal(id, id.includes('daily') ? 'daily' : 'long-term'); };
         });
 
-        // Daily Goals Logic
-        const dailyGoalInput = document.getElementById('daily-goal-input');
-        const addDailyGoalBtn = document.getElementById('add-daily-goal-btn');
-        const dailyGoalsList = document.getElementById('daily-goals-list');
-
-        async function renderDailyGoals() {
-            const goals = await fetchGoals('daily');
-            dailyGoalsList.innerHTML = '';
-            goals.forEach((goal) => {
-                const li = document.createElement('li');
-                li.className = `goal-item ${goal.completed ? 'completed' : ''}`;
-                li.innerHTML = `
-                    <div class="goal-text-wrapper">
-                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleDailyGoal(${goal.id}, ${goal.completed})">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                        <span class="goal-text" onclick="toggleDailyGoal(${goal.id}, ${goal.completed})">${goal.text}</span>
-                    </div>
-                    <button class="goal-delete" onclick="deleteDailyGoal(${goal.id})" aria-label="Delete goal">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                `;
-                dailyGoalsList.appendChild(li);
-            });
-        }
-
-        async function addDailyGoal() {
-            const text = dailyGoalInput.value.trim();
-            if (text) {
-                await addGoalToDB(text, 'daily');
-                dailyGoalInput.value = '';
-                renderDailyGoals();
-            }
-        }
-
-        async function toggleDailyGoal(id, currentStatus) {
-            await updateGoalInDB(id, !currentStatus);
-            renderDailyGoals();
-        }
-
-        async function deleteDailyGoal(id) {
-            await deleteGoalFromDB(id);
-            renderDailyGoals();
-        }
-
-        addDailyGoalBtn.addEventListener('click', addDailyGoal)
-        dailyGoalInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addDailyGoal();
-        });
-
-        // Initial render
-        renderGoals();
-        renderDailyGoals();
+        // Init
+        render('daily');
+        render('long-term');
     </script>
 </body>
-
 </html>
