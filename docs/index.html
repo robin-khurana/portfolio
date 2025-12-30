@@ -35,7 +35,6 @@
                 <h1 class="name">Robin Khurana Progress</h1>
             </div>
         </section>
-
         <section class="market-overview" style="padding: 2rem 0;">
             <h3 class="section-title">Market Overview</h3>
             <div class="tradingview-widget-container">
@@ -203,30 +202,72 @@
                 });
         });
 
+        const API_BASE = 'http://127.0.0.1:5000/api';
+
+        async function fetchGoals(type) {
+            try {
+                const response = await fetch(`${API_BASE}/goals?type=${type}`);
+                return await response.json();
+            } catch (error) {
+                console.error(`Error fetching ${type} goals:`, error);
+                return [];
+            }
+        }
+
+        async function addGoalToDB(text, type) {
+            try {
+                const response = await fetch(`${API_BASE}/goals`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, type })
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('Error adding goal:', error);
+            }
+        }
+
+        async function updateGoalInDB(id, completed) {
+            try {
+                await fetch(`${API_BASE}/goals/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ completed })
+                });
+            } catch (error) {
+                console.error('Error updating goal:', error);
+            }
+        }
+
+        async function deleteGoalFromDB(id) {
+            try {
+                await fetch(`${API_BASE}/goals/${id}`, {
+                    method: 'DELETE'
+                });
+            } catch (error) {
+                console.error('Error deleting goal:', error);
+            }
+        }
+
         // Long Term Goals Logic
         const goalInput = document.getElementById('goal-input');
         const addGoalBtn = document.getElementById('add-goal-btn');
         const goalsList = document.getElementById('goals-list');
 
-        let goals = JSON.parse(localStorage.getItem('longTermGoals')) || [];
-
-        function saveGoals() {
-            localStorage.setItem('longTermGoals', JSON.stringify(goals));
-        }
-
-        function renderGoals() {
+        async function renderGoals() {
+            const goals = await fetchGoals('long-term');
             goalsList.innerHTML = '';
-            goals.forEach((goal, index) => {
+            goals.forEach((goal) => {
                 const li = document.createElement('li');
                 li.className = `goal-item ${goal.completed ? 'completed' : ''}`;
                 li.innerHTML = `
                     <div class="goal-text-wrapper">
-                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleGoal(${index})">
+                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleGoal(${goal.id}, ${goal.completed})">
                             <i class="fa-solid fa-check"></i>
                         </div>
-                        <span class="goal-text" onclick="toggleGoal(${index})">${goal.text}</span>
+                        <span class="goal-text" onclick="toggleGoal(${goal.id}, ${goal.completed})">${goal.text}</span>
                     </div>
-                    <button class="goal-delete" onclick="deleteGoal(${index})" aria-label="Delete goal">
+                    <button class="goal-delete" onclick="deleteGoal(${goal.id})" aria-label="Delete goal">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 `;
@@ -234,25 +275,22 @@
             });
         }
 
-        function addGoal() {
+        async function addGoal() {
             const text = goalInput.value.trim();
             if (text) {
-                goals.push({ text, completed: false });
+                await addGoalToDB(text, 'long-term');
                 goalInput.value = '';
-                saveGoals();
                 renderGoals();
             }
         }
 
-        function toggleGoal(index) {
-            goals[index].completed = !goals[index].completed;
-            saveGoals();
+        async function toggleGoal(id, currentStatus) {
+            await updateGoalInDB(id, !currentStatus);
             renderGoals();
         }
 
-        function deleteGoal(index) {
-            goals.splice(index, 1);
-            saveGoals();
+        async function deleteGoal(id) {
+            await deleteGoalFromDB(id);
             renderGoals();
         }
 
@@ -261,32 +299,25 @@
             if (e.key === 'Enter') addGoal();
         });
 
-        renderGoals();
-
         // Daily Goals Logic
         const dailyGoalInput = document.getElementById('daily-goal-input');
         const addDailyGoalBtn = document.getElementById('add-daily-goal-btn');
         const dailyGoalsList = document.getElementById('daily-goals-list');
 
-        let dailyGoals = JSON.parse(localStorage.getItem('dailyGoals')) || [];
-
-        function saveDailyGoals() {
-            localStorage.setItem('dailyGoals', JSON.stringify(dailyGoals));
-        }
-
-        function renderDailyGoals() {
+        async function renderDailyGoals() {
+            const goals = await fetchGoals('daily');
             dailyGoalsList.innerHTML = '';
-            dailyGoals.forEach((goal, index) => {
+            goals.forEach((goal) => {
                 const li = document.createElement('li');
                 li.className = `goal-item ${goal.completed ? 'completed' : ''}`;
                 li.innerHTML = `
                     <div class="goal-text-wrapper">
-                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleDailyGoal(${index})">
+                        <div class="goal-check ${goal.completed ? 'checked' : ''}" onclick="toggleDailyGoal(${goal.id}, ${goal.completed})">
                             <i class="fa-solid fa-check"></i>
                         </div>
-                        <span class="goal-text" onclick="toggleDailyGoal(${index})">${goal.text}</span>
+                        <span class="goal-text" onclick="toggleDailyGoal(${goal.id}, ${goal.completed})">${goal.text}</span>
                     </div>
-                    <button class="goal-delete" onclick="deleteDailyGoal(${index})" aria-label="Delete goal">
+                    <button class="goal-delete" onclick="deleteDailyGoal(${goal.id})" aria-label="Delete goal">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 `;
@@ -294,33 +325,32 @@
             });
         }
 
-        function addDailyGoal() {
+        async function addDailyGoal() {
             const text = dailyGoalInput.value.trim();
             if (text) {
-                dailyGoals.push({ text, completed: false });
+                await addGoalToDB(text, 'daily');
                 dailyGoalInput.value = '';
-                saveDailyGoals();
                 renderDailyGoals();
             }
         }
 
-        function toggleDailyGoal(index) {
-            dailyGoals[index].completed = !dailyGoals[index].completed;
-            saveDailyGoals();
+        async function toggleDailyGoal(id, currentStatus) {
+            await updateGoalInDB(id, !currentStatus);
             renderDailyGoals();
         }
 
-        function deleteDailyGoal(index) {
-            dailyGoals.splice(index, 1);
-            saveDailyGoals();
+        async function deleteDailyGoal(id) {
+            await deleteGoalFromDB(id);
             renderDailyGoals();
         }
 
-        addDailyGoalBtn.addEventListener('click', addDailyGoal);
+        addDailyGoalBtn.addEventListener('click', addDailyGoal)
         dailyGoalInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') addDailyGoal();
         });
 
+        // Initial render
+        renderGoals();
         renderDailyGoals();
     </script>
 </body>

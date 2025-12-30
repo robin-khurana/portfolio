@@ -1,0 +1,10 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Database
+backend/goals.db
+
+# Mac system files
+.DS_Store
